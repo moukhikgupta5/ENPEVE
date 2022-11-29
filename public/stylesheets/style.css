@@ -1,13 +1,13 @@
 :root {
-  --dark-blue: #478ba2;
-  --light-blue: #b9d4db;
-  --dark-orange: #e9765b;
-  --light-orange: #f2a490;
-  --dark-pink: #de5b6d;
-  --green: #18a558;
-  --ivory: #f9f7f4;
+  --dark-blue: #202020;
+  --light-blue: #C0C0C0;
+  --dark-orange: #202020;
+  --light-orange: #C0C0C0;
+  --dark-pink: #202020;
+  --green: #202020;
+  --ivory: #C0C0C0;
   --black: #202020;
-  --dark-gray: #474747;
+  --dark-gray: #C0C0C0;
 }
 * {
   margin: 0px;
@@ -316,8 +316,8 @@ hr.gradient-style {
 }
 
 .img-small {
-  /* height: 5%; */
-  width: 20%;
+  height: 100px;
+  width: auto;
   margin: 2px;
 }
 

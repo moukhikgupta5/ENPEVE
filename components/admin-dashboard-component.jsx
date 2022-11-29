@@ -31,15 +31,14 @@ const Dashboard = () => {
     <div>
       <img
         style={imgStyle}
-        src="images/banner-admin-page.jpg"
+        src="images/banner-all-products.jpg"
         alt="dashboard-head"
       />
       <Wrapper>
-        <Title>Welcome to the Admin Panel</Title>
-        <Lead>
-          Here you can manage your products and categories as well as view users
-          and their orders.
-        </Lead>
+        <Title>Welcome to the Admin Panel of ENPEVE</Title>
+        {/* <Lead>
+          Y
+        </Lead> */}
       </Wrapper>
     </div>
   );

@@ -6,6 +6,7 @@ var LocalStrategy = require("passport-local").Strategy;
 const Product = require("../models/product");
 const Order = require("../models/order");
 const Cart = require("../models/cart");
+const Wishlist = require("../models/wishlist");
 const middleware = require("../middleware");
 const {
   userSignUpValidationRules,
@@ -13,6 +14,7 @@ const {
   validateSignup,
   validateSignin,
 } = require("../config/validator");
+const wishlist = require("../models/wishlist");
 const csrfProtection = csrf();
 router.use(csrfProtection);
 
@@ -45,6 +47,11 @@ router.post(
         const cart = await new Cart(req.session.cart);
         cart.user = req.user._id;
         await cart.save();
+      }
+      if (req.session.wishlist) {
+        const wishlist = await new Wishlist(req.session.wishlist);
+        wishlist.user = req.user._id;
+        await wishlist.save();
       }
       // redirect to the previous URL
       if (req.session.oldUrl) {
@@ -86,8 +93,9 @@ router.post(
   ],
   async (req, res) => {
     try {
-      // cart logic when the user logs in
+      // cart and wishlist logic when the user logs in
       let cart = await Cart.findOne({ user: req.user._id });
+      let wishlist = await Wishlist.findOne({ user: req.user._id });
       // if there is a cart session and user has no cart, save it to the user's cart in db
       if (req.session.cart && !cart) {
         const cart = await new Cart(req.session.cart);
@@ -97,6 +105,16 @@ router.post(
       // if user has a cart in db, load it to session
       if (cart) {
         req.session.cart = cart;
+      }
+      //wishlist
+      if (req.session.wishlist && !wishlist) {
+        const wishlist = await new Wishlist(req.session.wishlist);
+        wishlist.user = req.user._id;
+        await wishlist.save();
+      }
+      // if user has a wishlist in db, load it to session
+      if (wishlist) {
+        req.session.wishlist = wishlist;
       }
       // redirect to old URL before signing in
       if (req.session.oldUrl) {
@@ -137,6 +155,7 @@ router.get("/profile", middleware.isLoggedIn, async (req, res) => {
 router.get("/logout", middleware.isLoggedIn, (req, res) => {
   req.logout();
   req.session.cart = null;
+  req.session.wishlist = null;
   res.redirect("/");
 });
 module.exports = router;

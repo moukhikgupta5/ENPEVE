@@ -77,14 +77,15 @@
       <div class="col-md-4 col-sm-12 col-xs-12 right-nav">
         <ul>
           <li>
+            <a href="/wishlist">
+              <img src="/images/wish-icon.png" style="height:35px; padding-bottom: 8px;">
+                
+            </a>
+          </li>
+          <li>
             <a href="/shopping-cart">
-              <i class="fas fa-shopping-cart"></i> <% if(session.cart) { %>
-              <span class="badge badge-pill badge-info"
-                ><%= session.cart.totalQty %></span
-              >
-              <% } else { %>
-              <span class="badge badge-pill badge-info">0</span>
-              <% } %>
+              <i class="fas fa-shopping-cart"></i> 
+          
             </a>
           </li>
           <% if (login) { %>
@@ -100,7 +101,7 @@
               <i class="fas fa-user"></i> Welcome <%=currentUser.username%>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="/user/profile">User Account</a>
+              <a class="dropdown-item" href="/user/profile">My Orders</a>
               <div class="dropdown-divider"></div>
               <a class="dropdown-item" href="/user/logout">Logout</a>
             </div>
