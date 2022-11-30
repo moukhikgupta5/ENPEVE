@@ -146,7 +146,7 @@ router.get("/removeWish/:id", async function (req, res, next) {
     }
     //delete cart if qty is 0
     if (wishlist.totalQty <= 0) {
-      req.session.cart = null;
+      req.session.wishlist = null;
       await Wishlist.findByIdAndRemove(wishlist._id);
     }
     res.redirect(req.headers.referer);
